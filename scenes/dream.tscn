@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://chm58bhg10ll8"]
+
+[ext_resource type="PackedScene" uid="uid://gych1571v14y" path="res://scenes/indoors/floorFull.tscn" id="1_a7b8l"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_xsbaw"]
+vertices = PackedVector3Array(-0.8, 0.2, -0.8, -0.8, 0.2, 0.8, 2.8, 0.2, 0.8, 2.8, 0.2, -0.8)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 1
+geometry_source_geometry_mode = 2
+cell_size = 0.1
+cell_height = 0.1
+agent_height = 0.75
+agent_radius = 0.2
+
+[node name="dream" type="Node3D"]
+
+[node name="floorFull" parent="." instance=ExtResource("1_a7b8l")]
+
+[node name="floorFull2" parent="." instance=ExtResource("1_a7b8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="floorFull3" parent="." instance=ExtResource("1_a7b8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="floorFull4" parent="." instance=ExtResource("1_a7b8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="floorFull5" parent="." instance=ExtResource("1_a7b8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="floorFull6" parent="." instance=ExtResource("1_a7b8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+
+[node name="floorFull7" parent="." instance=ExtResource("1_a7b8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="floorFull8" parent="." instance=ExtResource("1_a7b8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+navigation_mesh = SubResource("NavigationMesh_xsbaw")

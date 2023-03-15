@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://qiqdgcm3i37j"]
+
+[ext_resource type="Script" path="res://scenes/minigames/journaling.gd" id="1_nti0e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mb5ca"]
+font_size = 64
+
+[node name="journaling_minigame" type="PanelContainer" node_paths=PackedStringArray("progress_bar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nti0e")
+progress_bar = NodePath("CenterContainer/VBoxContainer/ProgressBar")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 6.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Type The Letters as Fast as possible"
+label_settings = SubResource("LabelSettings_mb5ca")
+
+[node name="next_key_label" type="Label" parent="CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_mb5ca")
+horizontal_alignment = 1

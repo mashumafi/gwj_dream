@@ -1,0 +1,136 @@
+[gd_scene load_steps=19 format=3 uid="uid://j4ifx5s5ev5k"]
+
+[ext_resource type="Script" path="res://scenes/basicCharacter/basicCharacter.gd" id="1_ptyjq"]
+[ext_resource type="PackedScene" uid="uid://bymb8yme81hr1" path="res://models/basicCharacter/basicCharacter.glb" id="2_8xw8y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqo6o"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_mmmbx"]
+material = SubResource("StandardMaterial3D_oqo6o")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="Curve" id="Curve_wqyar"]
+_data = [Vector2(0, 1), 0.0, -0.202248, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_88in4"]
+offsets = PackedFloat32Array(0, 0.545946, 1)
+colors = PackedColorArray(0.716797, 0.716797, 0.716797, 1, 0.807843, 0.807843, 0.807843, 1, 1, 1, 1, 0)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fobfw"]
+radius = 0.2
+height = 0.75
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_stksd"]
+animation = &"lay"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w3gbj"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3b2hg"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_cx2lr"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_w3gbj")
+blend_point_0/pos = 2.08167e-14
+blend_point_1/node = SubResource("AnimationNodeAnimation_3b2hg")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_r54bq"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fmihy"]
+animation = &"open_in"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_x2h08"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6mhe2"]
+animation = &"open_out"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p5eo8"]
+animation = &"sit"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_6ymn7"]
+input_0/name = "move"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "sit"
+input_1/auto_advance = false
+input_1/reset = true
+input_2/name = "lay"
+input_2/auto_advance = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wymhf"]
+graph_offset = Vector2(-252.672, 570.246)
+nodes/lay/node = SubResource("AnimationNodeAnimation_stksd")
+nodes/lay/position = Vector2(50, 920)
+nodes/move/node = SubResource("AnimationNodeBlendSpace1D_cx2lr")
+nodes/move/position = Vector2(0, 640)
+nodes/open_in/node = SubResource("AnimationNodeOneShot_r54bq")
+nodes/open_in/position = Vector2(410, 570)
+nodes/open_in_anim/node = SubResource("AnimationNodeAnimation_fmihy")
+nodes/open_in_anim/position = Vector2(220, 850)
+nodes/open_out/node = SubResource("AnimationNodeOneShot_x2h08")
+nodes/open_out/position = Vector2(590, 550)
+nodes/open_out_anim/node = SubResource("AnimationNodeAnimation_6mhe2")
+nodes/open_out_anim/position = Vector2(400, 830)
+nodes/output/position = Vector2(750, 550)
+nodes/sit/node = SubResource("AnimationNodeAnimation_p5eo8")
+nodes/sit/position = Vector2(10, 800)
+nodes/transition/node = SubResource("AnimationNodeTransition_6ymn7")
+nodes/transition/position = Vector2(230, 610)
+node_connections = [&"output", 0, &"open_out", &"open_in", 0, &"transition", &"open_in", 1, &"open_in_anim", &"open_out", 0, &"open_in", &"open_out", 1, &"open_out_anim", &"transition", 0, &"move", &"transition", 1, &"sit", &"transition", 2, &"lay"]
+
+[node name="basicCharacter" type="CharacterBody3D"]
+input_ray_pickable = false
+script = ExtResource("1_ptyjq")
+
+[node name="basicCharacter" parent="." instance=ExtResource("2_8xw8y")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="move_particles" type="CPUParticles3D" parent="basicCharacter"]
+lifetime_randomness = 0.5
+mesh = SubResource("SphereMesh_mmmbx")
+emission_shape = 3
+emission_box_extents = Vector3(0.025, 2.08165e-12, 2.08165e-12)
+direction = Vector3(2.08165e-12, 0.5, -1)
+spread = 15.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 0.25
+initial_velocity_max = 0.5
+scale_amount_min = 0.25
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_wqyar")
+color = Color(1, 1, 1, 0.564706)
+color_ramp = SubResource("Gradient_88in4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.375, 2.08165e-12)
+shape = SubResource("CapsuleShape3D_fobfw")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_wymhf")
+anim_player = NodePath("../basicCharacter/AnimationPlayer")
+active = true
+root_motion_track = NodePath("basicCharacter2/Skeleton3D:Rig1")
+parameters/move/blend_position = 2.08165e-12
+parameters/open_in/active = false
+parameters/open_in/request = 0
+parameters/open_out/active = false
+parameters/open_out/request = 0
+parameters/transition/current_state = "move"
+parameters/transition/transition_request = ""
+parameters/transition/current_index = 0
+
+[node name="state_label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.2
+target_desired_distance = 0.1
+avoidance_enabled = true
+radius = 0.25

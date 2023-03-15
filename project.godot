@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="gwj_dream"
+run/main_scene="res://scenes/game.tscn"
+config/features=PackedStringArray("4.0", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Navigator="*res://scripts/navigator.gd"
+
+[debug]
+
+shapes/collision/shape_color=Color(0, 0.6, 0.701961, 0.831373)
+
+[display]
+
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_s3tc_bptc=true

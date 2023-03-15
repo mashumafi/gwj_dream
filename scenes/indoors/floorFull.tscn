@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://gych1571v14y"]
+
+[ext_resource type="PackedScene" uid="uid://b3qv6dwar3nod" path="res://models/indoors/structure/floorFull.glb" id="1_4sex4"]
+[ext_resource type="Script" path="res://scripts/navigable.gd" id="2_n6lyh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fbj5d"]
+size = Vector3(1, 0.1, 1)
+
+[node name="floorFull" type="Node3D"]
+
+[node name="floorFull" parent="." instance=ExtResource("1_4sex4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, -0.05, 2.08165e-12)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floorFull" groups=["navigation_mesh_source_group"]]
+script = ExtResource("2_n6lyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floorFull/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.08165e-12, -0.5)
+shape = SubResource("BoxShape3D_fbj5d")
+
+[editable path="floorFull"]

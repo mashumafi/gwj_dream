@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c03cchn7c88py"]
+
+[ext_resource type="PackedScene" uid="uid://boc2bgh1e8jg0" path="res://models/indoors/structure/wallWindowSlide.glb" id="1_ttbm0"]
+[ext_resource type="Script" path="res://scripts/transparent_mesh.gd" id="2_cdolp"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1e1tk"]
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d2q7o"]
+size = Vector3(1, 1, 0.05)
+
+[node name="wallWindowSlide" type="Node3D"]
+
+[node name="wallWindowSlide" parent="." instance=ExtResource("1_ttbm0")]
+
+[node name="Area3D" type="Area3D" parent="."]
+input_ray_pickable = false
+script = ExtResource("2_cdolp")
+meshes = Array[NodePath]([NodePath("../wallWindowSlide/wallWindowSlide(Clone)"), NodePath("../wallWindowSlide/wallWindowSlide(Clone)/windowBottom"), NodePath("../wallWindowSlide/wallWindowSlide(Clone)/windowTop")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0)
+shape = SubResource("CylinderShape3D_1e1tk")
+disabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["navigation_mesh_source_group"]]
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -0.025)
+shape = SubResource("BoxShape3D_d2q7o")
+
+[editable path="wallWindowSlide"]
