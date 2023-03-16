@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b7803bqc0oe6y"
-path="res://.godot/imported/bookcaseOpen.glb-71d08b6b003b08cbf0e4e662aeb8711b.scn"
+uid="uid://d3lf0gbwnrnlx"
+path="res://.godot/imported/trashcan.glb-8839cde1c6c3b984463bb43543712c55.scn"
 
 [deps]
 
-source_file="res://models/indoors/furniture/library/bookcaseOpen.glb"
-dest_files=["res://.godot/imported/bookcaseOpen.glb-71d08b6b003b08cbf0e4e662aeb8711b.scn"]
+source_file="res://models/indoors/furniture/kitchen/trashcan.glb"
+dest_files=["res://.godot/imported/trashcan.glb-8839cde1c6c3b984463bb43543712c55.scn"]
 
 [params]
 

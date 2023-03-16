@@ -99,6 +99,6 @@ scale_amount_min = 0.25
 scale_amount_max = 0.5
 color_ramp = SubResource("Gradient_7r0rl")
 
-[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/flameArea" to="." method="_entered"]
 [connection signal="mouse_entered" from="SubViewportContainer/SubViewport/flameArea" to="." method="_first_entered" flags=6]
+[connection signal="mouse_entered" from="SubViewportContainer/SubViewport/flameArea" to="." method="_entered"]
 [connection signal="mouse_exited" from="SubViewportContainer/SubViewport/flameArea" to="." method="_exited"]

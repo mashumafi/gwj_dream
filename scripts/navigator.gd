@@ -46,11 +46,14 @@ func transition_day():
 	var color_rect : ColorRect = game.get_node("ColorRect")
 	tween.tween_property(color_rect, "color", day_transition_image.get_pixel(0, 0), 1)
 	tween.tween_callback(func():
-		game.get_node("dream").queue_free()
+		var viewport = game.get_node("SubViewportContainer/SubViewport")
+		viewport.get_node("dream").queue_free()
 		var House := load("res://scenes/house.tscn")
 		var house = House.instantiate()
-		game.add_child(house)
-		game.get_node("basicCharacter").global_transform = house.get_node("playerStart").global_transform
+		viewport.add_child(house)
+		var player = viewport.get_node("basicCharacter")
+		player.global_transform = house.get_node("playerStart").global_transform
+		player.set_skin_type(player.SkinType.MAN)
 	)
 	tween.tween_method(func(delta): color_rect.color = day_transition_image.get_pixel(delta, 0), 0, day_transition_image.get_width() - 1, 3)
 	tween.tween_property(color_rect, "color", Color(0, 0, 0, 0), 1)
