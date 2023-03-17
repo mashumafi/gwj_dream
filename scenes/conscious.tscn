@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsleytx3e8aqy"]
+
+[ext_resource type="PackedScene" uid="uid://bymb8yme81hr1" path="res://models/basicCharacter/basicCharacter.glb" id="1_02jam"]
+[ext_resource type="Script" path="res://scenes/conscious.gd" id="1_mhdx3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1y5sg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lhxtk"]
+radius = 0.2
+height = 0.75
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bbiqt"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_rjano"]
+graph_offset = Vector2(-103.68, 66.24)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_bbiqt")
+nodes/Animation/position = Vector2(130, 130)
+node_connections = [&"output", 0, &"Animation"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ufvt"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_i8uwu"]
+material = SubResource("StandardMaterial3D_4ufvt")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 1.0
+
+[sub_resource type="Curve" id="Curve_sj6pd"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -360), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_rao6u"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, -360), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_abmq3"]
+offsets = PackedFloat32Array(0, 0.510563, 1)
+colors = PackedColorArray(0.925781, 0.875338, 0, 1, 0.46875, 0.33123, 0, 1, 0.470588, 0.329412, 0, 0.454902)
+
+[node name="conscious" type="Area3D" node_paths=PackedStringArray("outline_mesh") groups=["navigation_mesh_source_group"]]
+script = ExtResource("1_mhdx3")
+outline_mesh = NodePath("CPUParticles3D")
+
+[node name="basicCharacter" parent="." instance=ExtResource("1_02jam")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, -1)
+
+[node name="Skeleton3D" parent="basicCharacter/basicCharacter2" index="0"]
+bones/0/position = Vector3(0.24921, 0.0150496, -5.86997)
+bones/0/rotation = Quaternion(-0.509258, 0.516468, 0.484796, 0.488763)
+bones/1/rotation = Quaternion(0.0183714, -0.00782745, -0.0133203, 0.999712)
+bones/2/rotation = Quaternion(0.0368837, 0.0151513, -0.706059, 0.707029)
+bones/4/rotation = Quaternion(-0.71366, 0.679615, 0.150045, -0.0793714)
+bones/5/rotation = Quaternion(-0.0313495, 0.25936, 0.210436, 0.942054)
+bones/7/rotation = Quaternion(-0.670036, 0.706961, -0.132695, 0.183442)
+bones/8/rotation = Quaternion(0.0353141, 0.245567, -0.224317, 0.942407)
+bones/10/rotation = Quaternion(0.0429143, 0.997261, -0.0428393, -0.0423552)
+bones/11/rotation = Quaternion(0.0796295, -0.191428, 0.0223337, 0.978016)
+bones/13/rotation = Quaternion(0.0553531, -0.0835619, 0.994601, -0.0268789)
+bones/14/rotation = Quaternion(-0.0340138, 0.193845, 0.0241667, 0.980145)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, -0.5)
+shape = SubResource("BoxShape3D_1y5sg")
+
+[node name="Area3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, 0)
+shape = SubResource("CapsuleShape3D_lhxtk")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendTree_rjano")
+anim_player = NodePath("../basicCharacter/AnimationPlayer")
+active = true
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375, -1)
+visible = false
+explosiveness = 0.25
+randomness = 0.25
+lifetime_randomness = 0.25
+mesh = SubResource("CylinderMesh_i8uwu")
+particle_flag_rotate_y = true
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+angular_velocity_min = 4.0
+angular_velocity_max = 8.0
+angular_velocity_curve = SubResource("Curve_sj6pd")
+angle_min = -720.0
+angle_max = 720.0
+angle_curve = SubResource("Curve_rao6u")
+color_ramp = SubResource("Gradient_abmq3")
+
+[editable path="basicCharacter"]

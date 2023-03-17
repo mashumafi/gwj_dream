@@ -1,10 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://chm58bhg10ll8"]
+[gd_scene load_steps=20 format=3 uid="uid://chm58bhg10ll8"]
 
-[ext_resource type="PackedScene" uid="uid://gych1571v14y" path="res://scenes/indoors/floorFull.tscn" id="1_a7b8l"]
+[ext_resource type="PackedScene" uid="uid://dsleytx3e8aqy" path="res://scenes/conscious.tscn" id="1_465xm"]
+[ext_resource type="Shader" uid="uid://bkcefuv3vn4wo" path="res://materials/heightmap.tres" id="1_f3egx"]
+[ext_resource type="Script" path="res://scripts/dialog.gd" id="2_4w7y0"]
+[ext_resource type="Script" path="res://scripts/navigable.gd" id="2_540sl"]
+[ext_resource type="AudioStream" uid="uid://ce3fqn7tmt4lb" path="res://audio/dream.mp3" id="5_gparm"]
+
+[sub_resource type="Resource" id="Resource_5gm1p"]
+script = ExtResource("2_4w7y0")
+text = "This is your, our, dream. Fix our problems by confronting your nightmares! You are not happy enough to confront anything tonight."
+condition = "is_zero_approx(get_happiness())"
+
+[sub_resource type="Resource" id="Resource_mbyqe"]
+script = ExtResource("2_4w7y0")
+text = "Yo"
+condition = "true"
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_xsbaw"]
-vertices = PackedVector3Array(-0.8, 0.2, -0.8, -0.8, 0.2, 0.8, 2.8, 0.2, 0.8, 2.8, 0.2, -0.8)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+vertices = PackedVector3Array(-7.9, 0.699999, -15.8, -15.8, 0.699999, -15.8, -15.8, 0.699999, -8.9, -0.4, 0.699999, -2.3, 0, 0.699999, -2.4, 0, 0.699999, -15.8, -7.9, 0.699999, -15.8, -15.8, 0.699999, -8.9, -15.8, 0.699999, -2, -15.8, 0.699999, -2, -0.4, 0.699999, -2, -0.4, 0.699999, -2.3, 15.8, 0.699999, -8.9, 15.8, 0.699999, -15.8, 7.9, 0.699999, -15.8, 0, 0.699999, -15.8, 0, 0.699999, -2.4, 0.300001, 0.699999, -2.4, 0, 0.699999, -15.8, 0.300001, 0.699999, -2.4, 0.4, 0.699999, -2, 15.8, 0.699999, -2, 15.8, 0.699999, -8.9, 7.9, 0.699999, -15.8, -15.8, 0.699999, 6.9, -15.8, 0.699999, 15.8, -7.9, 0.699999, 15.8, -0.4, 0.699999, -1.7, -0.4, 0.699999, -2, -15.8, 0.699999, -2, 0, 0.699999, -1.6, -0.4, 0.699999, -1.7, -15.8, 0.699999, -2, -15.8, 0.699999, 6.9, -7.9, 0.699999, 15.8, 0, 0.699999, 15.8, 7.9, 0.699999, 15.8, 15.8, 0.699999, 15.8, 15.8, 0.699999, 6.9, 15.8, 0.699999, -2, 0.4, 0.699999, -2, 0.300001, 0.699999, -1.6, 0, 0.699999, 15.8, 7.9, 0.699999, 15.8, 15.8, 0.699999, 6.9, 0.300001, 0.699999, -1.6, 0, 0.699999, -1.6, 0, 0.699999, 15.8)
+polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(6, 3, 7), PackedInt32Array(7, 3, 8), PackedInt32Array(11, 10, 9), PackedInt32Array(13, 12, 14), PackedInt32Array(17, 16, 15), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 23), PackedInt32Array(20, 23, 22), PackedInt32Array(20, 22, 21), PackedInt32Array(26, 25, 24), PackedInt32Array(29, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(33, 30, 34), PackedInt32Array(34, 30, 35), PackedInt32Array(38, 37, 36), PackedInt32Array(40, 39, 41), PackedInt32Array(41, 39, 44), PackedInt32Array(41, 44, 43), PackedInt32Array(41, 43, 42), PackedInt32Array(47, 46, 45)]
 geometry_parsed_geometry_type = 1
 geometry_source_geometry_mode = 2
 cell_size = 0.1
@@ -12,31 +26,104 @@ cell_height = 0.1
 agent_height = 0.75
 agent_radius = 0.2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bv2bf"]
+render_priority = 0
+shader = ExtResource("1_f3egx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_tlook"]
+material = SubResource("ShaderMaterial_bv2bf")
+size = Vector2(32, 32)
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a62n7"]
+size = Vector3(32, 32, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cydl7"]
+transparency = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_iqpfb"]
+material = SubResource("StandardMaterial3D_cydl7")
+
+[sub_resource type="Curve" id="Curve_35fbt"]
+min_value = -0.01
+max_value = 10.0
+_data = [Vector2(0, 0), 0.0, 4.14429, 0, 0, Vector2(1, 9.75085), 0.539644, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_j313t"]
+_data = [Vector2(0.00493388, 1), 0.0, -0.131505, 0, 0, Vector2(1, 0), -3.50562, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_oc0b6"]
+offsets = PackedFloat32Array(0, 0.989028)
+colors = PackedColorArray(0.301961, 0.0823529, 0.231373, 0.501961, 0.72549, 0.180392, 0.580392, 0.25098)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2y40a"]
+sky_top_color = Color(0.462745, 0.137255, 0.54902, 1)
+sky_horizon_color = Color(0.647059, 0.258824, 0.670588, 1)
+sky_curve = 0.0375
+sky_energy_multiplier = 0.5
+ground_bottom_color = Color(0.2, 0.0588235, 0.152941, 1)
+ground_horizon_color = Color(0.611765, 0.129412, 0.121569, 1)
+ground_curve = 0.0606286
+ground_energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_ej62j"]
+sky_material = SubResource("ProceduralSkyMaterial_2y40a")
+
+[sub_resource type="Environment" id="Environment_vr2i0"]
+background_mode = 2
+sky = SubResource("Sky_ej62j")
+ambient_light_source = 3
+ambient_light_color = Color(0.564706, 0.145098, 0.372549, 1)
+ambient_light_energy = 0.75
+
 [node name="dream" type="Node3D"]
 
-[node name="floorFull" parent="." instance=ExtResource("1_a7b8l")]
-
-[node name="floorFull2" parent="." instance=ExtResource("1_a7b8l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-
-[node name="floorFull3" parent="." instance=ExtResource("1_a7b8l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
-
-[node name="floorFull4" parent="." instance=ExtResource("1_a7b8l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
-
-[node name="floorFull5" parent="." instance=ExtResource("1_a7b8l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-
-[node name="floorFull6" parent="." instance=ExtResource("1_a7b8l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
-
-[node name="floorFull7" parent="." instance=ExtResource("1_a7b8l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
-
-[node name="floorFull8" parent="." instance=ExtResource("1_a7b8l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+[node name="conscious" parent="." instance=ExtResource("1_465xm")]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0.5, -2)
+dialog = Array[ExtResource("2_4w7y0")]([SubResource("Resource_5gm1p"), SubResource("Resource_mbyqe")])
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 navigation_mesh = SubResource("NavigationMesh_xsbaw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_tlook")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" groups=["navigation_mesh_source_group"]]
+script = ExtResource("2_540sl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_a62n7")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="MeshInstance3D"]
+amount = 200
+explosiveness = 0.25
+randomness = 0.25
+lifetime_randomness = 0.25
+mesh = SubResource("SphereMesh_iqpfb")
+emission_shape = 3
+emission_box_extents = Vector3(16, 16, 1)
+direction = Vector3(2.08165e-12, 2.08165e-12, 1)
+spread = 0.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 8.0
+initial_velocity_max = 12.0
+linear_accel_min = -4.0
+linear_accel_max = -2.0
+linear_accel_curve = SubResource("Curve_35fbt")
+scale_amount_min = 0.25
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_j313t")
+color_ramp = SubResource("Gradient_oc0b6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vr2i0")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_gparm")
+autoplay = true

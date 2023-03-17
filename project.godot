@@ -13,6 +13,9 @@ config_version=5
 config/name="gwj_dream"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
+boot_splash/image="res://splash.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]

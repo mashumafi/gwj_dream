@@ -22,7 +22,7 @@ func _interact(character: CharacterBody3D):
 		printerr("Error parsing expression {0}".format([parser.get_error_text()]))
 		return
 	parser.execute([], base_instance)
-	Navigator.add_sleep_score(score)
+	Navigator.add_happy_score(score)
 
 func _get_action() -> String:
 	return action

@@ -5,7 +5,8 @@ var day_transition_image := day_transition.get_image()
 
 signal destination_requested(Vector3)
 signal action_changed(String)
-signal sleep_score_changed(float)
+signal happy_score_changed(float)
+signal message_sent(String)
 
 var destination: Object = null
 
@@ -19,25 +20,37 @@ func set_destination(position: Vector3, object: Object = null) -> void:
 func set_action(action: String):
 	action_changed.emit(action)
 
+func can_interact() -> bool:
+	return TIRED_SCORE < 100.0
+
 func clear_action():
-	action_changed.emit("")
+	set_action("")
 
-var SLEEP_SCORE := 0.0
+var HAPPY_SCORE := 0.0
+var TIRED_SCORE := 100.0
 
-func reset():
-	SLEEP_SCORE = 0
+func reset_happy():
+	HAPPY_SCORE = 0
+	happy_score_changed.emit(HAPPY_SCORE)
 
-func add_sleep_score(value: float) -> void:
-	prints("added", value, "to sleep score")
-	SLEEP_SCORE += value
-	sleep_score_changed.emit(value)
+func reset_sleep():
+	TIRED_SCORE = 0.0
 
-func start_sleep_timer():
-	await get_tree().create_timer(SLEEP_SCORE + 30.0).timeout
+func add_happy_score(value: float) -> void:
+	HAPPY_SCORE += value
+	happy_score_changed.emit(HAPPY_SCORE)
+
+func get_happy_timeout() -> float:
+	return HAPPY_SCORE + 30.0
+
+func start_happy_timer():
+	await get_tree().create_timer(get_happy_timeout()).timeout
 	transition_day()
 
+func send_message(message: String) -> void:
+	message_sent.emit(message)
+
 func transition_day():
-	SLEEP_SCORE = 0
 	var tree := get_tree()
 	tree.paused = true
 	var tween := create_tween()
@@ -54,6 +67,9 @@ func transition_day():
 		var player = viewport.get_node("basicCharacter")
 		player.global_transform = house.get_node("playerStart").global_transform
 		player.set_skin_type(player.SkinType.MAN)
+		Navigator.reset_happy()
+		Navigator.reset_sleep()
+		create_tween().tween_property(self, "TIRED_SCORE", 100, 60)
 	)
 	tween.tween_method(func(delta): color_rect.color = day_transition_image.get_pixel(delta, 0), 0, day_transition_image.get_width() - 1, 3)
 	tween.tween_property(color_rect, "color", Color(0, 0, 0, 0), 1)

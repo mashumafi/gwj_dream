@@ -1,6 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c77snv4kg088h"]
+[gd_scene load_steps=6 format=3 uid="uid://c77snv4kg088h"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_kswsl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_leu3d"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_uuuf1"]
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_icobl"]
 font_size = 128
@@ -8,7 +14,12 @@ outline_size = 32
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
-[node name="HUD" type="HBoxContainer"]
+[sub_resource type="LabelSettings" id="LabelSettings_8ahg6"]
+font_size = 64
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,16 +27,80 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kswsl")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HUD" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+custom_minimum_size = Vector2(320, 2.08165e-12)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Tiredness:"
+label_settings = SubResource("LabelSettings_leu3d")
+
+[node name="TirednessProgress" type="ProgressBar" parent="HUD/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+show_percentage = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HUD/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Happiness:"
+label_settings = SubResource("LabelSettings_uuuf1")
+
+[node name="HappinessProgress" type="ProgressBar" parent="HUD/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 50.0
+show_percentage = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HUD"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="actionLabel" type="Label" parent="VBoxContainer2"]
+[node name="actionLabel" type="Label" parent="HUD/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 label_settings = SubResource("LabelSettings_icobl")
 horizontal_alignment = 2
+
+[node name="Message" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+label_settings = SubResource("LabelSettings_8ahg6")
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="MessageTimer" type="Timer" parent="Message"]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="Message/MessageTimer" to="." method="_on_message_timer_timeout"]

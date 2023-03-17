@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://efrjpkl7ebgq"]
+[gd_scene load_steps=72 format=3 uid="uid://efrjpkl7ebgq"]
 
 [ext_resource type="PackedScene" uid="uid://gych1571v14y" path="res://scenes/indoors/floorFull.tscn" id="1_wqdke"]
 [ext_resource type="PackedScene" uid="uid://0uvy1wpfytsf" path="res://scenes/indoors/wall.tscn" id="2_2r4c3"]
@@ -44,6 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://uscq0pgdydnv" path="res://models/indoors/speakerSmall.glb" id="35_amiqj"]
 [ext_resource type="PackedScene" uid="uid://budo1ld243d5j" path="res://models/indoors/rugRectangle.glb" id="41_o8hww"]
 [ext_resource type="PackedScene" uid="uid://cmfp66160loir" path="res://models/indoors/pottedPlant.glb" id="42_10p7i"]
+[ext_resource type="AudioStream" uid="uid://dbl00ffg4yxg4" path="res://audio/awake.mp3" id="45_3odqr"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_pjorr"]
 vertices = PackedVector3Array(2.1, 0.2, -3.15, 2, 0.2, -3.75, 1.8, 0.2, -3.75, 1.8, 0.2, -3.05, 2.1, 0.2, -3.15, 1.8, 0.2, -3.05, 1.3, 0.2, -2.25, 3.8, 0.2, -2.25, 3.8, 0.2, -3.25, 1.8, 0.2, -3.05, 1.3, 0.2, -2.95, 1.3, 0.2, -2.25, 2.4, 0.7, -3.75, 2.4, 0.7, -3.55, 2.6, 0.7, -3.55, 2.6, 0.7, -3.75, 2.3, 0.2, 0.65, 2.6, 0.2, 0.75, 2.7, 0.2, 0.65, 2.7, 0.2, -0.65, 2.3, 0.2, -1.65, 6.4, 0.2, 1.45, 6.7, 0.2, 1.45, 6.7, 0.2, 1.15, 6.1, 0.2, 1.05, 4.1, 0.2, -0.55, 4.3, 0.2, -0.55, 4.4, 0.2, -0.95, 3.9, 0.2, -1.35, 3.1, 0.2, -1.35, 2.7, 0.2, -0.65, 4.4, 0.2, -0.95, 5.3, 0.2, -0.85, 5.2, 0.2, -1.65, 4, 0.2, -1.65, 3.9, 0.2, -1.35, 4.3, 0.2, 0.95, 4.3, 0.2, 1.45, 4.5, 0.2, 1.45, 5.3, 0.2, 0.95, 5.8, 0.2, -1.85, 5.3, 0.2, -1.85, 5.2, 0.2, -1.65, 5.3, 0.2, -0.85, 6.1, 0.2, -0.75, 6.1, 0.2, -1.35, 6.3, 0.2, 1.75, 6.4, 0.2, 1.45, 6.1, 0.2, 1.05, 5.3, 0.2, 0.95, 4.5, 0.2, 1.45, 4.6, 0.2, 1.75, 6.7, 0.2, -0.85, 6.7, 0.2, -1.35, 6.1, 0.2, -1.35, 6.1, 0.2, -0.75, 5.3, 0.2, 0.95, 6.1, 0.2, 1.05, 6.1, 0.2, -0.75, 5.3, 0.2, -0.85, 3.1, 0.2, -1.35, 3, 0.2, -1.65, 2.3, 0.2, -1.65, 2.7, 0.2, -0.65, 1.7, 0.2, 0.95, 1.7, 0.2, -1.15, 1.3, 0.2, -1.25, -0.9, 0.2, -0.55, -1.7, 0.2, 1.75, 1.6, 0.2, 1.75, 1.3, 0.2, -1.25, 1.3, 0.2, -1.65, -0.9, 0.2, -1.65, -0.9, 0.2, -0.55, -0.9, 0.2, -0.55, -1.7, 0.2, -0.45, -1.7, 0.2, 1.75, -1.7, 0.5, -1.55, -1.7, 0.5, -0.85, -1.3, 0.5, -0.85, -1.3, 0.5, -1.55, 4.3, 0.2, -0.55, 4.1, 0.2, -0.55, 4, 0.2, 0.65, 4.3, 0.2, 0.85, 2.6, 0.2, 0.75, 2.6, 0.2, 2.75, 3.3, 0.2, 2.75, 3.3, 0.2, 0.95, 2.7, 0.2, 0.65, 3.9, 0.2, 0.75, 4.3, 0.2, 0.85, 4, 0.2, 0.65, 3.3, 0.2, 0.95, 3.9, 0.2, 0.75, 4, 0.2, 0.65, 2.7, 0.2, 0.65, 6.5, 0.7, -0.45, 6.5, 0.7, 0.75, 6.7, 0.7, 0.75, 6.7, 0.7, -0.45, 3, 0.7, -0.25, 3, 0.7, 0.25, 3.7, 0.7, 0.25, 3.7, 0.7, -0.25)
@@ -839,6 +840,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 0, -0.75)
 
 [node name="playerStart" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.08165e-12, -1.5)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("45_3odqr")
+autoplay = true
 
 [editable path="structure/bathroom/toilet"]
 [editable path="structure/living_room/rugDoormat"]

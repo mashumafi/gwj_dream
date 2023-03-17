@@ -127,6 +127,7 @@ parameters/transition/current_index = 0
 
 [node name="state_label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 billboard = 1
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

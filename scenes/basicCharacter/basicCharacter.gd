@@ -41,7 +41,6 @@ func _animation_finished(anim_name: String) -> void:
 	if anim_name in ["open_in", "open_out"]:
 		state = State.MOVE
 	elif anim_name == "lay":
-		
 		var structure := $"../house/structure"
 		var bed := $"../house/bedSingle"
 		var tween := create_tween()
@@ -55,9 +54,10 @@ func _animation_finished(anim_name: String) -> void:
 		var dream = Dream.instantiate()
 		dream.position = position
 		dream.position.y = Vector3.DOWN.y * 1000
-		get_node("..").add_child(dream)
+		tween.parallel().tween_callback(get_node("..").add_child.bind(dream)).set_delay(3)
 		tween.parallel().tween_property(dream, "position:y", 0, 1).set_delay(3)
-		tween.parallel().tween_callback(Navigator.start_sleep_timer).set_delay(4.5)
+		tween.parallel().tween_callback(Navigator.start_happy_timer).set_delay(4.5)
+		tween.parallel().tween_property(Navigator, "TIRED_SCORE", 0.0, Navigator.get_happy_timeout()).set_delay(4.5)
 
 func set_skin_type(skin_type: SkinType) -> void:
 	var skin_material := StandardMaterial3D.new()

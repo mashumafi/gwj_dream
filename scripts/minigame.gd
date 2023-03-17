@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	progress_bar.value = timer.time_left
 
 func _timeout():
-	Navigator.add_sleep_score(_get_score())
+	Navigator.add_happy_score(_get_score())
 	queue_free()
 
 func _get_score() -> float:
